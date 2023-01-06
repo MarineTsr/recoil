@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import TodoList from "components/TodoList";
+import AddTodo from "components/AddTodo";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="card my-5">
+        <div className="card-header px-4">
+          <h1>Recoil</h1>
+        </div>
+
+        <div className="card-body px-4">
+          <AddTodo />
+          <hr/>
+          <h2 className="card-title mt-4">TodoList</h2>
+          <TodoList />
+        </div>
+      </div>
     </div>
   );
 }
