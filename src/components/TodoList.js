@@ -5,14 +5,12 @@ import { todoListState } from "state";
 function TodoList() {
   const todoList = useRecoilValue(todoListState);
 
-  console.log(todoList);
-
   return (
     <ul>
-      {todoList.length > 0 ? (
+      {!!todoList && todoList.length > 0 ? (
         todoList.map((item) => (
           <li key={item._id}>
-            <TodoItem content={item.content} />
+            <TodoItem item={item} />
           </li>
         ))
       ) : (
