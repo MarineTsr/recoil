@@ -6,7 +6,7 @@ function FilterTodo() {
 
   return (
     <select
-      class="form-select w-auto"
+      className="form-select w-auto"
       aria-label="Filter"
       onChange={(event) => setFilter(event.target.value)}
       value={filter}

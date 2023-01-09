@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import TodoList from "components/TodoList";
 import AddTodo from "components/AddTodo";
 import FilterTodo from "components/FilterTodo";
+import TodoStats from "components/TodoStats";
 
 function App() {
   return (
@@ -19,6 +20,16 @@ function App() {
             <FilterTodo />
           </div>
           <TodoList />
+        </div>
+      </div>
+
+      <div className="card my-5">
+        <div className="card-header px-4">
+          <h2>TodoStats</h2>
+        </div>
+
+        <div className="card-body px-4">
+          <TodoStats />
         </div>
       </div>
     </div>
