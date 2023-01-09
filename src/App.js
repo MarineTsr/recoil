@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import TodoList from "components/TodoList";
 import AddTodo from "components/AddTodo";
+import FilterTodo from "components/FilterTodo";
 
 function App() {
   return (
@@ -12,8 +13,11 @@ function App() {
 
         <div className="card-body px-4">
           <AddTodo />
-          <hr/>
+          <hr />
           <h2 className="card-title mt-4">TodoList</h2>
+          <div className="d-flex justify-content-end mb-4">
+            <FilterTodo />
+          </div>
           <TodoList />
         </div>
       </div>

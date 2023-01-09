@@ -1,9 +1,9 @@
 import TodoItem from "./TodoItem";
 import { useRecoilValue } from "recoil";
-import { todoListState } from "state";
+import { todoListFilter } from "state";
 
 function TodoList() {
-  const todoList = useRecoilValue(todoListState);
+  const todoList = useRecoilValue(todoListFilter);
 
   return (
     <ul>

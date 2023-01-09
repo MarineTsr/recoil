@@ -7,25 +7,24 @@ function AddTodo() {
   const setTodoListState = useSetRecoilState(todoListState);
 
   const handleInputChange = (event) => {
-    const currentInputValue = event.target.value;
-
-    if (!!currentInputValue) {
-      setNewTodo(event.target.value);
-    }
+    setNewTodo(event.target.value);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setTodoListState((oldState) => [
-      ...oldState,
-      {
-        _id: crypto.randomUUID(),
-        content: newTodo,
-        done: false,
-        edit: false,
-      },
-    ]);
-    setNewTodo("");
+
+    if (!!newTodo && newTodo.length > 0) {
+      setTodoListState((oldState) => [
+        ...oldState,
+        {
+          _id: crypto.randomUUID(),
+          content: newTodo,
+          done: false,
+          edit: false,
+        },
+      ]);
+      setNewTodo("");
+    }
   };
 
   return (
