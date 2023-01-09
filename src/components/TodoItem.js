@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "state";
 
-function TodoItem({ item }) {
+function TodoItem({ item, showDetail }) {
   const [editedTodo, setEditedTodo] = useState(item.content);
   const setTodoListState = useSetRecoilState(todoListState);
 
@@ -90,6 +90,14 @@ function TodoItem({ item }) {
               onClick={handleTodoEditMode}
             >
               <i className="fa-solid fa-pen"></i>
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary mx-1"
+              title="Détail"
+              onClick={showDetail}
+            >
+              <i className="fa-solid fa-magnifying-glass"></i>
             </button>
             <button
               type="button"

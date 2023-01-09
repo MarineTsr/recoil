@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 
 process.env.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -47,4 +47,14 @@ export const statsFilter = selector({
       wipPercentage: 100 - donePercentage,
     };
   },
+});
+
+export const extractTodoFilter = selectorFamily({
+  key: "extractTodoFilter",
+  get:
+    (_id) =>
+    ({ get }) => {
+      const todoList = get(todoListState);
+      return todoList.find((item) => item._id === _id);
+    },
 });
