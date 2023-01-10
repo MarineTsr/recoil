@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "state";
+import { updateTodo, deleteTodo } from "api";
 
 function TodoItem({ item, showDetail }) {
   const [editedTodo, setEditedTodo] = useState(item.content);
   const setTodoListState = useSetRecoilState(todoListState);
 
-  const handleTodoDelete = () => {
+  const handleTodoDelete = async () => {
+    await deleteTodo(item);
+
     setTodoListState((oldState) =>
       oldState.filter((current) => current._id !== item._id)
     );
   };
 
-  const handleTodoValidate = () => {
+  const handleTodoValidate = async () => {
+    const updatedTodo = await updateTodo({ ...item, done: !item.done });
+
     setTodoListState((oldState) =>
       oldState.map((current) =>
-        current._id === item._id ? { ...current, done: !current.done } : current
+        current._id === item._id ? updatedTodo : current
       )
     );
   };
@@ -28,14 +33,19 @@ function TodoItem({ item, showDetail }) {
     );
   };
 
-  const handleTodoEditSubmit = (event) => {
+  const handleTodoEditSubmit = async (event) => {
     event.preventDefault();
+
     if (editedTodo.length > 0) {
+      const updatedTodo = await updateTodo({
+        ...item,
+        content: editedTodo,
+        edit: false,
+      });
+
       setTodoListState((oldState) =>
         oldState.map((current) =>
-          current._id === item._id
-            ? { ...current, content: editedTodo, edit: false }
-            : current
+          current._id === item._id ? updatedTodo : current
         )
       );
     }

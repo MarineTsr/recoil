@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { todoListState } from "state";
+import { createTodo } from "api";
 
 function AddTodo() {
   const [newTodo, setNewTodo] = useState("");
@@ -10,19 +11,17 @@ function AddTodo() {
     setNewTodo(event.target.value);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     if (!!newTodo && newTodo.length > 0) {
-      setTodoListState((oldState) => [
-        ...oldState,
-        {
-          _id: crypto.randomUUID(),
-          content: newTodo,
-          done: false,
-          edit: false,
-        },
-      ]);
+      const createdTodo = await createTodo({
+        content: newTodo,
+        done: false,
+        edit: false,
+      });
+
+      setTodoListState((oldState) => [...oldState, createdTodo]);
       setNewTodo("");
     }
   };

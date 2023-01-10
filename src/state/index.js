@@ -1,10 +1,9 @@
 import { atom, selector, selectorFamily } from "recoil";
-
-process.env.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+import { getTodos, getTodo } from "api";
 
 export const todoListState = atom({
   key: "todoListState",
-  default: [],
+  default: getTodos(),
 });
 
 export const filterState = atom({
@@ -53,8 +52,7 @@ export const extractTodoFilter = selectorFamily({
   key: "extractTodoFilter",
   get:
     (_id) =>
-    ({ get }) => {
-      const todoList = get(todoListState);
-      return todoList.find((item) => item._id === _id);
+    async ({ get }) => {
+      return _id && getTodo(_id);
     },
 });
